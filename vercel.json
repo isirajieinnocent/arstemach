@@ -1,33 +1,10 @@
 {
   "version": 2,
-  "name": "arstemach",
-  "builds": [
-    {
-      "src": "**/*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.js",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/store",
-      "dest": "/arstemach-store.html"
-    },
-    {
-      "src": "/poland",
-      "dest": "/arstemach-poland.html"
-    },
-    {
-      "src": "/admin",
-      "dest": "/arstemach-admin.html"
-    }
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/store", "destination": "/arstemach-store.html" },
+    { "source": "/poland", "destination": "/arstemach-poland.html" },
+    { "source": "/admin", "destination": "/arstemach-admin.html" }
   ],
   "headers": [
     {
