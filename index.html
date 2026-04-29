@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AR STELMACH SPÓŁKA JAWNA – Wholesale Electronics</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#7B2FBE;--purple-dark:#5A1F8A;--purple-light:#A855F7;--purple-glow:rgba(123,47,190,0.15);
+  --bg:#0A0A0F;--bg2:#12121A;--bg3:#1A1A26;--card:#16161F;
+  --text:#F0EEFF;--muted:#9090A8;--border:rgba(123,47,190,0.25);
+  --gold:#F5C842;--radius:14px;--transition:0.22s cubic-bezier(.4,0,.2,1);
+}
+[data-theme=light]{
+  --bg:#F4F0FF;--bg2:#EDE7FF;--bg3:#E4DAF8;--card:#FFFFFF;
+  --text:#1A0533;--muted:#6B5C8A;--border:rgba(123,47,190,0.2);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background var(--transition),color var(--transition)}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem}
+[data-theme=light] header{background:rgba(244,240,255,0.9)}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:1rem;height:64px}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;color:var(--text);flex-shrink:0}
+.logo span{color:var(--purple-light)}
+nav{display:flex;gap:0.25rem;margin-left:auto}
+nav a{padding:0.45rem 1rem;border-radius:8px;font-size:0.875rem;font-weight:500;color:var(--muted);transition:all var(--transition)}
+nav a:hover,nav a.active{background:var(--purple-glow);color:var(--purple-light)}
+.header-actions{display:flex;align-items:center;gap:0.75rem;margin-left:1rem}
+.lang-select{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:0.35rem 0.6rem;border-radius:8px;font-size:0.8rem;cursor:pointer}
+.theme-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--transition)}
+.theme-btn:hover{background:var(--purple-glow);border-color:var(--purple)}
+.cart-btn{background:var(--purple);color:#fff;border:none;padding:0.45rem 1rem;border-radius:8px;font-size:0.875rem;font-weight:600;display:flex;align-items:center;gap:0.5rem;transition:all var(--transition)}
+.cart-btn:hover{background:var(--purple-dark)}
+.cart-count{background:var(--gold);color:#000;border-radius:50%;width:18px;height:18px;font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+/* HERO */
+.hero{max-width:1400px;margin:0 auto;padding:5rem 2rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:var(--purple-glow);border:1px solid var(--border);border-radius:20px;padding:0.35rem 1rem;font-size:0.8rem;color:var(--purple-light);font-weight:600;margin-bottom:1.5rem;letter-spacing:0.06em;text-transform:uppercase}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:1.5rem}
+.hero h1 em{font-style:normal;color:var(--purple-light)}
+.hero p{color:var(--muted);line-height:1.8;font-size:1.05rem;margin-bottom:2rem;max-width:480px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--purple);color:#fff;border:none;padding:0.85rem 2rem;border-radius:10px;font-size:1rem;font-weight:600;transition:all var(--transition);font-family:inherit}
+.btn-primary:hover{background:var(--purple-dark);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--purple-light);border:1.5px solid var(--purple);padding:0.85rem 2rem;border-radius:10px;font-size:1rem;font-weight:600;transition:all var(--transition);font-family:inherit}
+.btn-outline:hover{background:var(--purple-glow)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;text-align:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--purple-light)}
+.stat-lbl{font-size:0.78rem;color:var(--muted);margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em}
+.hero-visual{display:flex;flex-direction:column;gap:1rem}
+.hero-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:all var(--transition);cursor:pointer}
+.hero-card:hover{border-color:var(--purple);transform:translateX(6px)}
+.hero-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+.hero-card-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem}
+.hero-price{color:var(--purple-light);font-weight:700;font-size:1.1rem}
+.hero-card-meta{display:flex;gap:0.5rem}
+.badge{font-size:0.72rem;font-weight:600;padding:0.25rem 0.7rem;border-radius:20px;letter-spacing:0.04em}
+.badge-new{background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.3)}
+.badge-used{background:rgba(245,200,66,0.15);color:#F5C842;border:1px solid rgba(245,200,66,0.3)}
+.badge-game{background:rgba(123,47,190,0.2);color:var(--purple-light);border:1px solid var(--border)}
+.badge-moq{background:var(--bg3);color:var(--muted);border:1px solid var(--border)}
+
+/* SECTIONS */
+.section{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem}
+.section-title{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;letter-spacing:-0.02em}
+.section-title span{color:var(--purple-light)}
+.see-all{color:var(--purple-light);font-size:0.9rem;font-weight:600;transition:color var(--transition)}
+.see-all:hover{color:var(--purple-light);opacity:0.7}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all var(--transition);cursor:pointer}
+.product-card:hover{border-color:var(--purple);transform:translateY(-4px);box-shadow:0 12px 40px rgba(123,47,190,0.2)}
+.product-img{height:220px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:0;overflow:hidden;border-bottom:1px solid var(--border)}
+.product-img img{width:100%;height:100%;object-fit:contain;padding:12px}
+.product-body{padding:1.1rem}
+.product-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:0.35rem;line-height:1.3}
+.product-storage{font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem}
+.product-footer{display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem}
+.product-price{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--purple-light)}
+.add-btn{background:var(--purple);color:#fff;border:none;width:32px;height:32px;border-radius:8px;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all var(--transition)}
+.add-btn:hover{background:var(--purple-dark);transform:scale(1.1)}
+.badges-row{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem}
+
+/* CONTACT SECTION */
+.contact-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 2rem}
+.contact-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-info h2{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:1rem}
+.contact-info p{color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.contact-detail{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;color:var(--muted);font-size:0.9rem}
+.contact-detail strong{color:var(--text)}
+.contact-icon{width:36px;height:36px;background:var(--purple-glow);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
+.contact-form h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:1.5rem}
+.form-group{margin-bottom:1.1rem}
+.form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--muted);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.05em}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.7rem 1rem;color:var(--text);font-family:inherit;font-size:0.9rem;transition:border-color var(--transition);outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--purple)}
+.form-group textarea{resize:vertical;min-height:100px}
+.submit-btn{width:100%;background:var(--purple);color:#fff;border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;font-family:inherit;transition:all var(--transition)}
+.submit-btn:hover{background:var(--purple-dark)}
+.form-success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#22C55E;border-radius:8px;padding:0.75rem 1rem;text-align:center;font-size:0.9rem;margin-top:1rem;display:none}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
+.why-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+.why-icon{font-size:2rem;margin-bottom:1rem}
+.why-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem}
+.why-desc{color:var(--muted);font-size:0.875rem;line-height:1.7}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2rem}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:var(--muted);font-size:0.85rem;transition:color var(--transition)}
+.footer-links a:hover{color:var(--purple-light)}
+.footer-copy{color:var(--muted);font-size:0.82rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--purple);color:#fff;padding:0.75rem 1.5rem;border-radius:10px;font-size:0.9rem;font-weight:600;z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.3s ease;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:18px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;padding:2rem}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.modal-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem}
+.modal-close{background:var(--bg3);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;font-size:1.2rem;display:flex;align-items:center;justify-content:center}
+.modal-img{width:100%;height:220px;background:var(--bg2);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;overflow:hidden}
+.modal-img img{width:100%;height:100%;object-fit:contain;padding:16px}
+.modal-price{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--purple-light);margin-bottom:0.5rem}
+.modal-desc{color:var(--muted);font-size:0.9rem;line-height:1.8;margin-bottom:1.5rem}
+.modal-specs{background:var(--bg2);border-radius:10px;padding:1rem;margin-bottom:1.5rem}
+.spec-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.875rem}
+.spec-row:last-child{border-bottom:none}
+.spec-label{color:var(--muted)}
+.spec-val{font-weight:600}
+.modal-add-btn{width:100%;background:var(--purple);color:#fff;border:none;padding:1rem;border-radius:10px;font-size:1rem;font-weight:700;font-family:inherit;transition:all var(--transition)}
+.modal-add-btn:hover{background:var(--purple-dark)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:2rem}
+  .contact-inner{grid-template-columns:1fr}
+  nav{display:none}
+}
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .header-inner{gap:0.5rem}
+  .logo{font-size:0.85rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">AR <span>STELMACH</span></div>
+    <nav>
+      <a href="index.html" class="active" data-i18n="nav_home">Home</a>
+      <a href="arstemach-store.html" data-i18n="nav_store">Store</a>
+      <a href="arstemach-poland.html" data-i18n="nav_poland">Poland</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
+        <option value="en">🇬🇧 EN</option>
+        <option value="pl">🇵🇱 PL</option>
+        <option value="de">🇩🇪 DE</option>
+        <option value="fr">🇫🇷 FR</option>
+        <option value="es">🇪🇸 ES</option>
+      </select>
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+      <button class="cart-btn" onclick="location.href='arstemach-store.html#cart'">
+        🛒 <span data-i18n="cart">Cart</span> <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="hero-tag">✦ <span data-i18n="hero_tag">Wholesale · Europe · Poland</span></div>
+    <h1>Premium <em>iPhones</em> &amp; <em>PS5</em> Wholesale</h1>
+    <p data-i18n="hero_desc">AR STELMACH SPÓŁKA JAWNA supplies certified new and used iPhones and PlayStation 5 consoles to retailers across Europe. Competitive MOQ, transparent pricing, worldwide delivery.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="location.href='arstemach-store.html'" data-i18n="browse_products">Browse Products</button>
+      <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i18n="contact_us">Contact Us</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">48+</div><div class="stat-lbl" data-i18n="products">Products</div></div>
+      <div class="stat"><div class="stat-num">EU</div><div class="stat-lbl" data-i18n="delivery">Delivery</div></div>
+      <div class="stat"><div class="stat-num">B2B</div><div class="stat-lbl" data-i18n="wholesale">Wholesale</div></div>
+    </div>
+  </div>
+  <div class="hero-visual" id="heroCards"></div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <div class="section-title">Featured <span>Products</span></div>
+    <a href="arstemach-store.html" class="see-all" data-i18n="see_all">See all →</a>
+  </div>
+  <div class="product-grid" id="featuredGrid"></div>
+</section>
+
+<section class="section">
+  <div class="section-header"><div class="section-title">Why <span>Choose Us</span></div></div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">🔒</div><div class="why-title" data-i18n="why1_t">Verified Stock</div><div class="why-desc" data-i18n="why1_d">All devices are quality-checked and certified before dispatch.</div></div>
+    <div class="why-card"><div class="why-icon">🌍</div><div class="why-title" data-i18n="why2_t">Worldwide Delivery</div><div class="why-desc" data-i18n="why2_d">We ship across Europe and worldwide with tracked logistics.</div></div>
+    <div class="why-card"><div class="why-icon">💼</div><div class="why-title" data-i18n="why3_t">B2B Focused</div><div class="why-desc" data-i18n="why3_d">Dedicated to wholesalers, retailers and resellers with volume pricing.</div></div>
+    <div class="why-card"><div class="why-icon">📞</div><div class="why-title" data-i18n="why4_t">Direct Support</div><div class="why-desc" data-i18n="why4_d">Reach our team directly via email or WhatsApp for fast responses.</div></div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h2 data-i18n="contact_title">Get In <span style="color:var(--purple-light)">Touch</span></h2>
+      <p data-i18n="contact_desc">Have questions about our products, pricing or minimum order quantities? Send us a message and we will get back to you within 24 hours.</p>
+      <div class="contact-detail"><div class="contact-icon">📧</div><div><strong>sale@arstemach.pl</strong></div></div>
+      <div class="contact-detail"><div class="contact-icon">🌐</div><div><strong>arstemach.pl</strong></div></div>
+      <div class="contact-detail"><div class="contact-icon">📍</div><div><strong>Poland / Europe</strong></div></div>
+    </div>
+    <div class="contact-form">
+      <h3 data-i18n="send_message">Send Us a Message</h3>
+      <div class="form-group">
+        <label data-i18n="your_name">Your Name</label>
+        <input type="text" id="cName" placeholder="John Doe">
+      </div>
+      <div class="form-group">
+        <label data-i18n="email">Email Address</label>
+        <input type="email" id="cEmail" placeholder="john@company.com">
+      </div>
+      <div class="form-group">
+        <label data-i18n="subject">Subject</label>
+        <input type="text" id="cSubject" placeholder="Product inquiry...">
+      </div>
+      <div class="form-group">
+        <label data-i18n="message">Message</label>
+        <textarea id="cMessage" placeholder="Tell us what you need..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="sendContact()" data-i18n="send_message_btn">Send Message</button>
+      <div class="form-success" id="contactSuccess" data-i18n="message_sent">✓ Message sent! We'll get back to you within 24 hours.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AR STELMACH SPÓŁKA JAWNA</div>
+    <div class="footer-links">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="arstemach-store.html" data-i18n="nav_store">Store</a>
+      <a href="arstemach-poland.html" data-i18n="nav_poland">Poland</a>
+      <a href="arstemach-admin.html">Admin</a>
+    </div>
+    <div class="footer-copy">© 2026 AR STELMACH · sale@arstemach.pl</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- Product Detail Modal -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle"></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-img"><img id="modalImg" src="" alt=""></div>
+    <div class="badges-row" id="modalBadges"></div>
+    <div class="modal-price" id="modalPrice"></div>
+    <div class="modal-desc" id="modalDesc"></div>
+    <div class="modal-specs" id="modalSpecs"></div>
+    <button class="modal-add-btn" id="modalAddBtn" data-i18n="add_to_cart">Add to Cart</button>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+// i18n
+const TRANSLATIONS={
+  en:{nav_home:"Home",nav_store:"Store",nav_poland:"Poland",nav_contact:"Contact",cart:"Cart",hero_tag:"Wholesale · Europe · Poland",hero_desc:"AR STELMACH SPÓŁKA JAWNA supplies certified new and used iPhones and PlayStation 5 consoles to retailers across Europe.",browse_products:"Browse Products",contact_us:"Contact Us",products:"Products",delivery:"Delivery",wholesale:"Wholesale",see_all:"See all →",why1_t:"Verified Stock",why1_d:"All devices are quality-checked and certified before dispatch.",why2_t:"Worldwide Delivery",why2_d:"We ship across Europe and worldwide with tracked logistics.",why3_t:"B2B Focused",why3_d:"Dedicated to wholesalers, retailers and resellers with volume pricing.",why4_t:"Direct Support",why4_d:"Reach our team directly via email or WhatsApp for fast responses.",contact_title:"Get In Touch",contact_desc:"Have questions about our products? Send us a message.",send_message:"Send Us a Message",your_name:"Your Name",email:"Email Address",subject:"Subject",message:"Message",send_message_btn:"Send Message",message_sent:"✓ Message sent! We'll get back to you within 24 hours.",add_to_cart:"Add to Cart"},
+  pl:{nav_home:"Główna",nav_store:"Sklep",nav_poland:"Polska",nav_contact:"Kontakt",cart:"Koszyk",hero_tag:"Hurtownia · Europa · Polska",hero_desc:"AR STELMACH SPÓŁKA JAWNA dostarcza certyfikowane nowe i używane iPhone'y oraz konsole PlayStation 5 dla sprzedawców w całej Europie.",browse_products:"Przeglądaj produkty",contact_us:"Skontaktuj się",products:"Produkty",delivery:"Dostawa",wholesale:"Hurtownia",see_all:"Zobacz wszystkie →",why1_t:"Zweryfikowany stan",why1_d:"Wszystkie urządzenia są sprawdzane i certyfikowane przed wysyłką.",why2_t:"Dostawa na cały świat",why2_d:"Wysyłamy po całej Europie i na cały świat ze śledzeniem przesyłki.",why3_t:"Dla firm B2B",why3_d:"Dedykowane dla hurtowników, sprzedawców detalicznych i resellerów.",why4_t:"Bezpośrednie wsparcie",why4_d:"Skontaktuj się bezpośrednio przez e-mail lub WhatsApp.",contact_title:"Skontaktuj się",contact_desc:"Masz pytania o produkty? Wyślij nam wiadomość.",send_message:"Wyślij wiadomość",your_name:"Twoje imię",email:"Adres e-mail",subject:"Temat",message:"Wiadomość",send_message_btn:"Wyślij wiadomość",message_sent:"✓ Wiadomość wysłana! Odezwiemy się w ciągu 24 godzin.",add_to_cart:"Dodaj do koszyka"},
+  de:{nav_home:"Startseite",nav_store:"Shop",nav_poland:"Polen",nav_contact:"Kontakt",cart:"Warenkorb",browse_products:"Produkte ansehen",contact_us:"Kontakt",products:"Produkte",delivery:"Lieferung",wholesale:"Großhandel",see_all:"Alle ansehen →",contact_title:"Kontakt aufnehmen",send_message:"Nachricht senden",your_name:"Ihr Name",email:"E-Mail-Adresse",subject:"Betreff",message:"Nachricht",send_message_btn:"Nachricht senden",message_sent:"✓ Nachricht gesendet!",add_to_cart:"In den Warenkorb"},
+  fr:{nav_home:"Accueil",nav_store:"Boutique",nav_poland:"Pologne",nav_contact:"Contact",cart:"Panier",browse_products:"Voir les produits",contact_us:"Nous contacter",products:"Produits",delivery:"Livraison",wholesale:"Grossiste",see_all:"Voir tout →",contact_title:"Contactez-nous",send_message:"Envoyer un message",your_name:"Votre nom",email:"Adresse e-mail",subject:"Sujet",message:"Message",send_message_btn:"Envoyer",message_sent:"✓ Message envoyé!",add_to_cart:"Ajouter au panier"},
+  es:{nav_home:"Inicio",nav_store:"Tienda",nav_poland:"Polonia",nav_contact:"Contacto",cart:"Carrito",browse_products:"Ver productos",contact_us:"Contáctenos",products:"Productos",delivery:"Entrega",wholesale:"Mayorista",see_all:"Ver todo →",contact_title:"Contáctenos",send_message:"Enviar mensaje",your_name:"Su nombre",email:"Correo electrónico",subject:"Asunto",message:"Mensaje",send_message_btn:"Enviar mensaje",message_sent:"✓ ¡Mensaje enviado!",add_to_cart:"Añadir al carrito"}
+};
+
+let currentLang=localStorage.getItem('lang')||'en';
+
+function t(k){return (TRANSLATIONS[currentLang]||TRANSLATIONS.en)[k]||k}
+
+function applyTranslations(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    if(TRANSLATIONS[currentLang]&&TRANSLATIONS[currentLang][key]) el.textContent=TRANSLATIONS[currentLang][key];
+  });
+}
+
+function setLang(l){
+  currentLang=l;
+  localStorage.setItem('lang',l);
+  document.getElementById('langSelect').value=l;
+  applyTranslations();
+}
+
+function toggleTheme(){
+  const d=document.documentElement;
+  const isLight=d.getAttribute('data-theme')==='light';
+  d.setAttribute('data-theme',isLight?'dark':'light');
+  document.querySelector('.theme-btn').textContent=isLight?'🌙':'☀️';
+  localStorage.setItem('theme',isLight?'dark':'light');
+}
+
+// Init theme
+const savedTheme=localStorage.getItem('theme')||'dark';
+document.documentElement.setAttribute('data-theme',savedTheme);
+document.querySelector('.theme-btn').textContent=savedTheme==='light'?'☀️':'🌙';
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function updateCartCount(){
+  const cart=JSON.parse(localStorage.getItem('arstemach_cart')||'[]');
+  document.getElementById('cartCount').textContent=cart.reduce((a,i)=>a+i.qty,0);
+}
+
+function addToCart(p){
+  let cart=JSON.parse(localStorage.getItem('arstemach_cart')||'[]');
+  const idx=cart.findIndex(i=>i.id===p.id);
+  if(idx>-1) cart[idx].qty+=1;
+  else cart.push({...p,qty:1});
+  localStorage.setItem('arstemach_cart',JSON.stringify(cart));
+  updateCartCount();
+  showToast('Added to cart!');
+}
+
+let currentProduct=null;
+function openModal(p){
+  currentProduct=p;
+  document.getElementById('modalTitle').textContent=p.name+' '+p.storage;
+  document.getElementById('modalImg').src=p.img||'';
+  document.getElementById('modalImg').onerror=function(){this.parentNode.innerHTML='<span style="font-size:4rem">📱</span>'};
+  document.getElementById('modalPrice').textContent='€'+p.price;
+  document.getElementById('modalDesc').textContent=p.desc||'Premium quality device. Wholesale pricing for verified B2B buyers.';
+  document.getElementById('modalBadges').innerHTML=
+    `<span class="badge badge-${p.condition==='New'?'new':p.condition==='Used'?'used':'game'}">${p.condition}</span>
+     <span class="badge badge-moq">MOQ: ${p.moq} units</span>`;
+  document.getElementById('modalSpecs').innerHTML=`
+    <div class="spec-row"><span class="spec-label">Model</span><span class="spec-val">${p.name}</span></div>
+    <div class="spec-row"><span class="spec-label">Storage</span><span class="spec-val">${p.storage}</span></div>
+    <div class="spec-row"><span class="spec-label">Condition</span><span class="spec-val">${p.condition}</span></div>
+    <div class="spec-row"><span class="spec-label">Price</span><span class="spec-val">€${p.price}</span></div>
+    <div class="spec-row"><span class="spec-label">MOQ</span><span class="spec-val">${p.moq} units</span></div>
+    <div class="spec-row"><span class="spec-label">Brand</span><span class="spec-val">${p.brand||'Apple'}</span></div>
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modalAddBtn').onclick=function(){if(currentProduct){addToCart(currentProduct);closeModal();}};
+
+function getProducts(){
+  const saved=localStorage.getItem('arstemach_products');
+  if(saved) return JSON.parse(saved);
+  return window.DEFAULT_PRODUCTS||[];
+}
+
+function renderHeroCards(){
+  const products=getProducts();
+  const featured=products.slice(0,3);
+  document.getElementById('heroCards').innerHTML=featured.map(p=>`
+    <div class="hero-card" onclick="openModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+      <div class="hero-card-header">
+        <div class="hero-card-name">${p.name} ${p.storage}</div>
+        <div class="hero-price">€${p.price}</div>
+      </div>
+      <div class="hero-card-meta">
+        <span class="badge badge-${p.condition==='New'?'new':p.condition==='Used'?'used':'game'}">${p.condition}</span>
+        <span class="badge badge-moq">MOQ: ${p.moq}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderFeatured(){
+  const products=getProducts();
+  const featured=products.filter(p=>p.condition==='New').slice(0,8);
+  document.getElementById('featuredGrid').innerHTML=featured.map(p=>`
+    <div class="product-card" onclick="openModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+      <div class="product-img"><img src="${p.img||''}" alt="${p.name}" onerror="this.parentNode.innerHTML='<span style=font-size:3.5rem>📱</span>'"></div>
+      <div class="product-body">
+        <div class="badges-row">
+          <span class="badge badge-${p.condition==='New'?'new':p.condition==='Used'?'used':'game'}">${p.condition}</span>
+          <span class="badge badge-moq">MOQ: ${p.moq}</span>
+        </div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-storage">${p.storage}</div>
+        <div class="product-footer">
+          <div class="product-price">€${p.price}</div>
+          <button class="add-btn" onclick="event.stopPropagation();addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">+</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function sendContact(){
+  const name=document.getElementById('cName').value.trim();
+  const email=document.getElementById('cEmail').value.trim();
+  const subject=document.getElementById('cSubject').value.trim();
+  const message=document.getElementById('cMessage').value.trim();
+  if(!name||!email||!message){showToast('Please fill all required fields');return;}
+
+  const settings=JSON.parse(localStorage.getItem('arstemach_settings')||'{}');
+  if(settings.emailjsPublicKey&&settings.emailjsServiceId&&settings.emailjsTemplateId){
+    emailjs.init(settings.emailjsPublicKey);
+    emailjs.send(settings.emailjsServiceId,settings.emailjsTemplateId,{
+      from_name:name,from_email:email,subject:subject,message:message,to_email:'sale@arstemach.pl'
+    }).then(()=>{
+      document.getElementById('contactSuccess').style.display='block';
+      document.getElementById('cName').value='';
+      document.getElementById('cEmail').value='';
+      document.getElementById('cSubject').value='';
+      document.getElementById('cMessage').value='';
+    }).catch(()=>showToast('Email sent! (configure EmailJS in admin for real delivery)'));
+  } else {
+    document.getElementById('contactSuccess').style.display='block';
+    document.getElementById('cName').value='';
+    document.getElementById('cEmail').value='';
+    document.getElementById('cSubject').value='';
+    document.getElementById('cMessage').value='';
+  }
+}
+
+document.getElementById('langSelect').value=currentLang;
+applyTranslations();
+updateCartCount();
+renderHeroCards();
+renderFeatured();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</body>
+</html>

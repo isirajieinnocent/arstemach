@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin – AR STELMACH</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#7B2FBE;--purple-dark:#5A1F8A;--purple-light:#A855F7;--purple-glow:rgba(123,47,190,0.15);--bg:#0A0A0F;--bg2:#12121A;--bg3:#1A1A26;--card:#16161F;--text:#F0EEFF;--muted:#9090A8;--border:rgba(123,47,190,0.25);--gold:#F5C842;--radius:12px;--transition:0.2s ease;--danger:#ef4444;--success:#22c55e}
+[data-theme=light]{--bg:#F4F0FF;--bg2:#EDE7FF;--bg3:#E4DAF8;--card:#FFFFFF;--text:#1A0533;--muted:#6B5C8A;--border:rgba(123,47,190,0.2)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button{cursor:pointer;font-family:inherit}
+input,textarea,select{font-family:inherit}
+
+/* LOGIN */
+.login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000;padding:1rem}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2.5rem;width:100%;max-width:400px}
+.login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;text-align:center;margin-bottom:0.5rem}
+.login-logo span{color:var(--purple-light)}
+.login-sub{text-align:center;color:var(--muted);font-size:0.875rem;margin-bottom:2rem}
+.login-form .form-group{margin-bottom:1rem}
+.login-form label{display:block;font-size:0.8rem;font-weight:600;color:var(--muted);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.05em}
+.login-form input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;color:var(--text);font-size:0.9rem;outline:none;transition:border-color var(--transition)}
+.login-form input:focus{border-color:var(--purple)}
+.login-btn{width:100%;background:var(--purple);color:#fff;border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;margin-top:0.5rem;transition:all var(--transition)}
+.login-btn:hover{background:var(--purple-dark)}
+.login-error{color:var(--danger);font-size:0.85rem;text-align:center;margin-top:0.75rem;display:none}
+
+/* ADMIN LAYOUT */
+.admin-layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:0.25rem;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:1.5rem;padding:0 0.5rem}
+.sidebar-logo span{color:var(--purple-light)}
+.sidebar-section-label{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;padding:0.5rem;margin-top:0.75rem}
+.nav-item{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.75rem;border-radius:8px;font-size:0.875rem;font-weight:500;color:var(--muted);transition:all var(--transition);cursor:pointer;border:none;background:transparent;width:100%;text-align:left}
+.nav-item:hover,.nav-item.active{background:var(--purple-glow);color:var(--purple-light)}
+.nav-item .icon{font-size:1rem;width:20px;text-align:center;flex-shrink:0}
+.sidebar-footer{margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
+.logout-btn{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.75rem;border-radius:8px;font-size:0.875rem;font-weight:500;color:var(--danger);transition:all var(--transition);cursor:pointer;border:none;background:transparent;width:100%}
+.logout-btn:hover{background:rgba(239,68,68,0.1)}
+
+/* MAIN */
+.admin-main{padding:2rem;overflow-y:auto}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+.admin-header h1{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem}
+.theme-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;font-size:1rem;display:flex;align-items:center;justify-content:center}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:block}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem}
+.stat-label{font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem}
+.stat-val{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--purple-light)}
+.stat-sub{font-size:0.78rem;color:var(--muted);margin-top:0.25rem}
+
+/* CARDS */
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem}
+.section-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.section-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem}
+
+/* BUTTONS */
+.btn{padding:0.55rem 1.1rem;border-radius:8px;font-size:0.875rem;font-weight:600;border:none;transition:all var(--transition);display:inline-flex;align-items:center;gap:0.4rem}
+.btn-primary{background:var(--purple);color:#fff}
+.btn-primary:hover{background:var(--purple-dark)}
+.btn-danger{background:rgba(239,68,68,0.15);color:var(--danger);border:1px solid rgba(239,68,68,0.3)}
+.btn-danger:hover{background:rgba(239,68,68,0.25)}
+.btn-edit{background:var(--purple-glow);color:var(--purple-light);border:1px solid var(--border)}
+.btn-edit:hover{border-color:var(--purple)}
+.btn-sm{padding:0.35rem 0.75rem;font-size:0.8rem}
+
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.875rem}
+th{font-size:0.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;padding:0.6rem 0.75rem;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:0.7rem 0.75rem;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--purple-glow)}
+.prod-img-cell{width:48px;height:48px;border-radius:8px;background:var(--bg2);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.prod-img-cell img{width:100%;height:100%;object-fit:contain;padding:4px}
+.badge{font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px}
+.badge-new{background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.3)}
+.badge-used{background:rgba(245,200,66,0.15);color:#F5C842;border:1px solid rgba(245,200,66,0.3)}
+.badge-game{background:rgba(123,47,190,0.2);color:var(--purple-light);border:1px solid var(--border)}
+.actions-cell{display:flex;gap:0.5rem;align-items:center}
+
+/* FORMS */
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--muted);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.05em}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.7rem 1rem;color:var(--text);font-size:0.875rem;outline:none;transition:border-color var(--transition)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--purple)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.img-preview{width:100%;height:140px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:0.75rem}
+.img-preview img{width:100%;height:100%;object-fit:contain;padding:8px}
+.upload-btn-label{display:flex;align-items:center;justify-content:center;gap:0.5rem;background:var(--purple);color:#fff;padding:0.6rem 1rem;border-radius:8px;font-size:0.875rem;font-weight:600;cursor:pointer;margin-bottom:0.5rem}
+.upload-btn-label input{display:none}
+.divider{text-align:center;font-size:0.78rem;color:var(--muted);margin:0.5rem 0}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:18px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;padding:2rem}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.modal-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem}
+.modal-close{background:var(--bg3);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;font-size:1.2rem;display:flex;align-items:center;justify-content:center}
+
+/* ORDERS */
+.order-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem}
+.order-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem}
+.order-id{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem}
+.order-date{font-size:0.78rem;color:var(--muted)}
+.order-customer{font-size:0.875rem;color:var(--muted);margin-bottom:0.5rem}
+.order-total{font-family:'Syne',sans-serif;font-weight:700;color:var(--purple-light)}
+.order-items{font-size:0.8rem;color:var(--muted);line-height:1.7}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--purple);color:#fff;padding:0.75rem 1.5rem;border-radius:10px;font-size:0.9rem;font-weight:600;z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.3s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* SETTINGS */
+.settings-group{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem}
+.settings-group-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:1.25rem;color:var(--purple-light)}
+
+@media(max-width:900px){.admin-layout{grid-template-columns:1fr}.sidebar{height:auto;position:relative;flex-direction:row;flex-wrap:wrap;gap:0.25rem;padding:0.75rem}.form-row,.form-row-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">AR <span>STELMACH</span></div>
+    <div class="login-sub">Admin Panel — Restricted Access</div>
+    <div class="login-form">
+      <div class="form-group"><label>Username</label><input type="text" id="loginUser" placeholder="admin" value="admin"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="login-btn" onclick="doLogin()">Sign In</button>
+      <div class="login-error" id="loginError">Invalid username or password</div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-layout" id="adminLayout" style="display:none">
+  <aside class="sidebar">
+    <div class="sidebar-logo">AR <span>STELMACH</span></div>
+    <div class="sidebar-section-label">Main</div>
+    <button class="nav-item active" onclick="showPanel('dashboard',this)"><span class="icon">📊</span>Dashboard</button>
+    <button class="nav-item" onclick="showPanel('products',this)"><span class="icon">📦</span>Products</button>
+    <button class="nav-item" onclick="showPanel('orders',this)"><span class="icon">🧾</span>Orders</button>
+    <button class="nav-item" onclick="showPanel('addProduct',this)"><span class="icon">➕</span>Add Product</button>
+    <div class="sidebar-section-label">Config</div>
+    <button class="nav-item" onclick="showPanel('settings',this)"><span class="icon">⚙️</span>Settings</button>
+    <button class="nav-item" onclick="showPanel('password',this)"><span class="icon">🔑</span>Password</button>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()"><span class="icon">🚪</span>Log Out</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1 id="panelTitle">Dashboard</h1>
+      <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="section-card">
+        <div class="section-card-header"><div class="section-card-title">Recent Orders</div></div>
+        <div id="recentOrders"></div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="panel" id="panel-products">
+      <div class="section-card">
+        <div class="section-card-header">
+          <div class="section-card-title">All Products</div>
+          <div style="display:flex;gap:0.5rem;align-items:center">
+            <input id="prodSearch" placeholder="Search..." style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.45rem 0.75rem;color:var(--text);font-size:0.85rem;outline:none;width:180px" oninput="renderProductTable()">
+            <button class="btn btn-primary" onclick="showPanel('addProduct',null)">+ Add</button>
+          </div>
+        </div>
+        <div class="table-wrap"><table id="productTable"><thead><tr><th>Image</th><th>Name</th><th>Storage</th><th>Condition</th><th>Price</th><th>MOQ</th><th>Brand</th><th>Actions</th></tr></thead><tbody id="productTbody"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="panel" id="panel-orders">
+      <div class="section-card">
+        <div class="section-card-header">
+          <div class="section-card-title">All Orders</div>
+          <button class="btn btn-danger btn-sm" onclick="if(confirm('Clear all orders?')){localStorage.removeItem('arstemach_orders');renderOrders()}">Clear All</button>
+        </div>
+        <div id="ordersContainer"></div>
+      </div>
+    </div>
+
+    <!-- ADD PRODUCT -->
+    <div class="panel" id="panel-addProduct">
+      <div class="section-card">
+        <div class="section-card-header"><div class="section-card-title">Add New Product</div></div>
+        <div class="form-row">
+          <div class="form-group"><label>Product Name *</label><input id="nName" placeholder="iPhone 15 Pro"></div>
+          <div class="form-group"><label>Brand *</label><select id="nBrand"><option>Apple</option><option>Sony</option></select></div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-group"><label>Storage</label><input id="nStorage" placeholder="256GB"></div>
+          <div class="form-group"><label>Condition *</label><select id="nCondition"><option>New</option><option>Used</option><option>Game</option></select></div>
+          <div class="form-group"><label>Colour</label><input id="nColour" placeholder="Black"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Price (€) *</label><input id="nPrice" type="number" step="0.01" placeholder="499.99"></div>
+          <div class="form-group"><label>MOQ *</label><input id="nMoq" type="number" placeholder="5"></div>
+        </div>
+        <div class="form-group"><label>Description</label><textarea id="nDesc" placeholder="Product description..."></textarea></div>
+        <div class="form-group">
+          <label>Product Photo</label>
+          <div class="img-preview" id="newImgPreview"><span style="font-size:2.5rem">📱</span></div>
+          <label class="upload-btn-label"><input type="file" accept="image/*" onchange="handleImgUpload(this,'newImgPreview','nImg')">📁 Upload from Computer</label>
+          <div class="divider">— or paste URL below —</div>
+          <input id="nImg" placeholder="https://..." oninput="previewFromUrl(this.value,'newImgPreview')">
+        </div>
+        <button class="btn btn-primary" onclick="addProduct()" style="width:100%;padding:0.9rem;font-size:1rem">Add Product</button>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="settings-group">
+        <div class="settings-group-title">Store Information</div>
+        <div class="form-group"><label>Store Name</label><input id="sStoreName"></div>
+        <div class="form-group"><label>Owner Email (display only)</label><input id="sOwnerEmail" value="sale@arstemach.pl" readonly></div>
+        <div class="form-group"><label>WhatsApp Number</label><input id="sWhatsapp" placeholder="+48 123 456 789"></div>
+        <div class="form-group"><label>Store Location</label><input id="sLocation" placeholder="Poland / Europe"></div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-group-title">EmailJS Configuration</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">Configure EmailJS to receive orders and contact messages at <strong>sale@arstemach.pl</strong>. Get your keys at <a href="https://emailjs.com" target="_blank" style="color:var(--purple-light)">emailjs.com</a></p>
+        <div class="form-group"><label>Public Key</label><input id="sEmailjsKey" placeholder="user_xxxxx"></div>
+        <div class="form-group"><label>Service ID</label><input id="sEmailjsService" placeholder="service_xxxxx"></div>
+        <div class="form-group"><label>Template ID</label><input id="sEmailjsTemplate" placeholder="template_xxxxx"></div>
+      </div>
+      <button class="btn btn-primary" onclick="saveSettings()" style="width:100%;padding:0.9rem;font-size:1rem">Save Settings</button>
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="panel" id="panel-password">
+      <div class="section-card" style="max-width:440px">
+        <div class="section-card-header"><div class="section-card-title">Change Password</div></div>
+        <div class="form-group"><label>Current Password</label><input type="password" id="pCurrent"></div>
+        <div class="form-group"><label>New Password</label><input type="password" id="pNew"></div>
+        <div class="form-group"><label>Confirm New Password</label><input type="password" id="pConfirm"></div>
+        <button class="btn btn-primary" onclick="changePassword()" style="width:100%;padding:0.9rem">Change Password</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="editModal" onclick="if(event.target===this)closeEdit()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Edit Product</div>
+      <button class="modal-close" onclick="closeEdit()">✕</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Name *</label><input id="eName"></div>
+      <div class="form-group"><label>Brand</label><select id="eBrand"><option>Apple</option><option>Sony</option></select></div>
+    </div>
+    <div class="form-row-3">
+      <div class="form-group"><label>Storage</label><input id="eStorage"></div>
+      <div class="form-group"><label>Condition</label><select id="eCondition"><option>New</option><option>Used</option><option>Game</option></select></div>
+      <div class="form-group"><label>Colour</label><input id="eColour"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Price (€)</label><input id="ePrice" type="number" step="0.01"></div>
+      <div class="form-group"><label>MOQ</label><input id="eMoq" type="number"></div>
+    </div>
+    <div class="form-group"><label>Description</label><textarea id="eDesc"></textarea></div>
+    <div class="form-group">
+      <label>Product Photo</label>
+      <div class="img-preview" id="editImgPreview"><span style="font-size:2.5rem">📱</span></div>
+      <label class="upload-btn-label"><input type="file" accept="image/*" onchange="handleImgUpload(this,'editImgPreview','eImg')">📁 Upload from Computer</label>
+      <div class="divider">— or paste URL below —</div>
+      <input id="eImg" placeholder="https://..." oninput="previewFromUrl(this.value,'editImgPreview')">
+    </div>
+    <button class="btn btn-primary" onclick="saveEdit()" style="width:100%;padding:0.9rem;font-size:1rem">Save Changes</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script>
+// ── AUTH ──────────────────────────────────────────────────────────────────
+const savedTheme=localStorage.getItem('theme')||'dark';
+document.documentElement.setAttribute('data-theme',savedTheme);
+
+function doLogin(){
+  const user=document.getElementById('loginUser').value.trim();
+  const pass=document.getElementById('loginPass').value.trim();
+  const settings=window.getSettings();
+  if(user==='admin'&&pass===settings.adminPassword){
+    localStorage.setItem('arstemach_admin_auth','1');
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('adminLayout').style.display='grid';
+    initAdmin();
+  } else {
+    document.getElementById('loginError').style.display='block';
+  }
+}
+
+function doLogout(){
+  localStorage.removeItem('arstemach_admin_auth');
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('adminLayout').style.display='none';
+}
+
+function toggleTheme(){
+  const d=document.documentElement;const l=d.getAttribute('data-theme')==='light';
+  d.setAttribute('data-theme',l?'dark':'light');
+  document.querySelector('.theme-btn').textContent=l?'🌙':'☀️';
+  localStorage.setItem('theme',l?'dark':'light');
+}
+
+document.querySelector('.theme-btn').textContent=savedTheme==='light'?'☀️':'🌙';
+
+// Check auth on load
+if(localStorage.getItem('arstemach_admin_auth')==='1'){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('adminLayout').style.display='grid';
+  initAdmin();
+}
+
+function showToast(msg,ok=true){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.background=ok?'var(--purple)':'var(--danger)';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ── PANELS ────────────────────────────────────────────────────────────────
+const panelTitles={dashboard:'Dashboard',products:'Products',orders:'Orders',addProduct:'Add Product',settings:'Settings',password:'Change Password'};
+
+function showPanel(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  if(btn) btn.classList.add('active');
+  document.getElementById('panelTitle').textContent=panelTitles[name]||name;
+  if(name==='dashboard') renderDashboard();
+  if(name==='products') renderProductTable();
+  if(name==='orders') renderOrders();
+  if(name==='settings') loadSettings();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+function initAdmin(){renderDashboard();}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────────
+function renderDashboard(){
+  const products=window.getProducts();
+  const orders=JSON.parse(localStorage.getItem('arstemach_orders')||'[]');
+  const totalRevenue=orders.reduce((a,o)=>a+(parseFloat(o.order_total?.replace('€',''))||0),0);
+  const newCount=products.filter(p=>p.condition==='New').length;
+  const usedCount=products.filter(p=>p.condition==='Used').length;
+  const gameCount=products.filter(p=>p.condition==='Game').length;
+  document.getElementById('statsGrid').innerHTML=`
+    <div class="stat-card"><div class="stat-label">Total Products</div><div class="stat-val">${products.length}</div><div class="stat-sub">${newCount} New · ${usedCount} Used · ${gameCount} PS5</div></div>
+    <div class="stat-card"><div class="stat-label">Total Orders</div><div class="stat-val">${orders.length}</div><div class="stat-sub">Since launch</div></div>
+    <div class="stat-card"><div class="stat-label">Total Revenue</div><div class="stat-val">€${totalRevenue.toFixed(0)}</div><div class="stat-sub">From orders</div></div>
+    <div class="stat-card"><div class="stat-label">New iPhones</div><div class="stat-val">${newCount}</div><div class="stat-sub">In catalogue</div></div>`;
+  const recentOrders=orders.slice(-5).reverse();
+  const container=document.getElementById('recentOrders');
+  if(!recentOrders.length){container.innerHTML='<p style="color:var(--muted);font-size:0.875rem;text-align:center;padding:2rem">No orders yet</p>';return;}
+  container.innerHTML=recentOrders.map(o=>`
+    <div class="order-card">
+      <div class="order-header">
+        <div><div class="order-id">Order #${String(o.id).slice(-6)}</div><div class="order-date">${new Date(o.date).toLocaleDateString()}</div></div>
+        <div class="order-total">${o.order_total}</div>
+      </div>
+      <div class="order-customer">👤 ${o.from_name} · ${o.from_email}</div>
+      <div class="order-items">${o.order_details?.replace(/\n/g,'<br>')}</div>
+    </div>`).join('');
+}
+
+// ── PRODUCT TABLE ─────────────────────────────────────────────────────────
+function renderProductTable(){
+  const products=window.getProducts();
+  const search=(document.getElementById('prodSearch')?.value||'').toLowerCase();
+  const filtered=products.filter(p=>
+    p.name.toLowerCase().includes(search)||
+    (p.storage||'').toLowerCase().includes(search)||
+    (p.brand||'').toLowerCase().includes(search)||
+    p.condition.toLowerCase().includes(search)
+  );
+  document.getElementById('productTbody').innerHTML=filtered.map(p=>`
+    <tr>
+      <td><div class="prod-img-cell"><img src="${p.img||''}" alt="" onerror="this.parentNode.innerHTML='<span style=font-size:1.2rem>${p.brand==='Sony'?'🎮':'📱'}</span>'"></div></td>
+      <td style="font-weight:600">${p.name}</td>
+      <td>${p.storage}</td>
+      <td><span class="badge badge-${p.condition==='New'?'new':p.condition==='Used'?'used':'game'}">${p.condition}</span></td>
+      <td style="color:var(--purple-light);font-weight:700">€${p.price}</td>
+      <td>${p.moq}</td>
+      <td>${p.brand}</td>
+      <td><div class="actions-cell">
+        <button class="btn btn-edit btn-sm" onclick="openEdit(${p.id})">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id})">Delete</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ── ORDERS ────────────────────────────────────────────────────────────────
+function renderOrders(){
+  const orders=JSON.parse(localStorage.getItem('arstemach_orders')||'[]').reverse();
+  const c=document.getElementById('ordersContainer');
+  if(!orders.length){c.innerHTML='<p style="color:var(--muted);text-align:center;padding:3rem;font-size:0.875rem">No orders yet</p>';return;}
+  c.innerHTML=orders.map(o=>`
+    <div class="order-card">
+      <div class="order-header">
+        <div><div class="order-id">Order #${String(o.id).slice(-6)}</div><div class="order-date">${new Date(o.date).toLocaleString()}</div></div>
+        <div class="order-total">${o.order_total}</div>
+      </div>
+      <div class="order-customer">👤 ${o.from_name} · ${o.from_email} · ${o.phone}</div>
+      <div class="order-customer">📍 ${o.address}</div>
+      ${o.notes?`<div class="order-customer">📝 ${o.notes}</div>`:''}
+      <div class="order-items" style="margin-top:0.5rem">${o.order_details?.replace(/\n/g,'<br>')}</div>
+    </div>`).join('');
+}
+
+// ── ADD PRODUCT ───────────────────────────────────────────────────────────
+function addProduct(){
+  const name=document.getElementById('nName').value.trim();
+  const price=parseFloat(document.getElementById('nPrice').value);
+  const moq=parseInt(document.getElementById('nMoq').value);
+  if(!name||isNaN(price)||isNaN(moq)){showToast('Fill all required fields',false);return;}
+  const products=window.getProducts();
+  const newId=Math.max(...products.map(p=>p.id),0)+1;
+  products.push({
+    id:newId,
+    name,
+    brand:document.getElementById('nBrand').value,
+    storage:document.getElementById('nStorage').value,
+    condition:document.getElementById('nCondition').value,
+    colour:document.getElementById('nColour').value,
+    price,moq,
+    desc:document.getElementById('nDesc').value,
+    img:document.getElementById('nImg').value,
+    category:document.getElementById('nBrand').value==='Sony'?'PS5':'iPhone'
+  });
+  window.saveProducts(products);
+  // Reset form
+  ['nName','nStorage','nColour','nPrice','nMoq','nDesc','nImg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('newImgPreview').innerHTML='<span style="font-size:2.5rem">📱</span>';
+  showToast('Product added successfully!');
+  showPanel('products',document.querySelector('.nav-item:nth-child(3)'));
+}
+
+// ── EDIT PRODUCT ──────────────────────────────────────────────────────────
+let editingId=null;
+function openEdit(id){
+  const p=window.getProducts().find(x=>x.id===id);
+  if(!p)return;
+  editingId=id;
+  document.getElementById('eName').value=p.name;
+  document.getElementById('eBrand').value=p.brand||'Apple';
+  document.getElementById('eStorage').value=p.storage||'';
+  document.getElementById('eCondition').value=p.condition;
+  document.getElementById('eColour').value=p.colour||'';
+  document.getElementById('ePrice').value=p.price;
+  document.getElementById('eMoq').value=p.moq;
+  document.getElementById('eDesc').value=p.desc||'';
+  document.getElementById('eImg').value=p.img||'';
+  const preview=document.getElementById('editImgPreview');
+  if(p.img){preview.innerHTML=`<img src="${p.img}" onerror="this.parentNode.innerHTML='<span style=font-size:2.5rem>📱</span>'">`;}
+  else{preview.innerHTML='<span style="font-size:2.5rem">📱</span>';}
+  document.getElementById('editModal').classList.add('open');
+}
+
+function closeEdit(){document.getElementById('editModal').classList.remove('open');editingId=null;}
+
+function saveEdit(){
+  if(!editingId)return;
+  const products=window.getProducts();
+  const idx=products.findIndex(p=>p.id===editingId);
+  if(idx===-1)return;
+  products[idx]={
+    ...products[idx],
+    name:document.getElementById('eName').value.trim(),
+    brand:document.getElementById('eBrand').value,
+    storage:document.getElementById('eStorage').value,
+    condition:document.getElementById('eCondition').value,
+    colour:document.getElementById('eColour').value,
+    price:parseFloat(document.getElementById('ePrice').value),
+    moq:parseInt(document.getElementById('eMoq').value),
+    desc:document.getElementById('eDesc').value,
+    img:document.getElementById('eImg').value
+  };
+  window.saveProducts(products);
+  closeEdit();
+  renderProductTable();
+  showToast('Product updated!');
+}
+
+function deleteProduct(id){
+  if(!confirm('Delete this product?'))return;
+  const products=window.getProducts().filter(p=>p.id!==id);
+  window.saveProducts(products);
+  renderProductTable();
+  showToast('Product deleted');
+}
+
+// ── IMAGE HELPERS ─────────────────────────────────────────────────────────
+function handleImgUpload(input,previewId,inputId){
+  if(!input.files||!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    document.getElementById(inputId).value=e.target.result;
+    const d=document.getElementById(previewId);
+    d.innerHTML=`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:contain;padding:8px">`;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function previewFromUrl(url,previewId){
+  const d=document.getElementById(previewId);
+  if(!url){d.innerHTML='<span style="font-size:2.5rem">📱</span>';return;}
+  d.innerHTML=`<img src="${url}" style="width:100%;height:100%;object-fit:contain;padding:8px" onerror="this.parentNode.innerHTML='<span style=font-size:2.5rem>📱</span>'">`;
+}
+
+// ── SETTINGS ──────────────────────────────────────────────────────────────
+function loadSettings(){
+  const s=window.getSettings();
+  document.getElementById('sStoreName').value=s.storeName;
+  document.getElementById('sOwnerEmail').value=s.ownerEmail;
+  document.getElementById('sWhatsapp').value=s.whatsapp;
+  document.getElementById('sLocation').value=s.location;
+  document.getElementById('sEmailjsKey').value=s.emailjsPublicKey;
+  document.getElementById('sEmailjsService').value=s.emailjsServiceId;
+  document.getElementById('sEmailjsTemplate').value=s.emailjsTemplateId;
+}
+
+function saveSettings(){
+  const current=window.getSettings();
+  const updated={
+    ...current,
+    storeName:document.getElementById('sStoreName').value,
+    whatsapp:document.getElementById('sWhatsapp').value,
+    location:document.getElementById('sLocation').value,
+    emailjsPublicKey:document.getElementById('sEmailjsKey').value,
+    emailjsServiceId:document.getElementById('sEmailjsService').value,
+    emailjsTemplateId:document.getElementById('sEmailjsTemplate').value,
+  };
+  localStorage.setItem('arstemach_settings',JSON.stringify(updated));
+  showToast('Settings saved!');
+}
+
+// ── PASSWORD ──────────────────────────────────────────────────────────────
+function changePassword(){
+  const current=document.getElementById('pCurrent').value;
+  const newP=document.getElementById('pNew').value;
+  const confirm=document.getElementById('pConfirm').value;
+  const settings=window.getSettings();
+  if(current!==settings.adminPassword){showToast('Current password incorrect',false);return;}
+  if(!newP||newP.length<4){showToast('New password too short',false);return;}
+  if(newP!==confirm){showToast('Passwords do not match',false);return;}
+  const updated={...settings,adminPassword:newP};
+  localStorage.setItem('arstemach_settings',JSON.stringify(updated));
+  document.getElementById('pCurrent').value='';
+  document.getElementById('pNew').value='';
+  document.getElementById('pConfirm').value='';
+  showToast('Password changed!');
+}
+</script>
+</body>
+</html>
