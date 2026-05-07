@@ -1,5 +1,5 @@
 // ── AR STELMACH – Shared Data & Utilities ──────────────────────────────────
-
+ 
 window.DEFAULT_PRODUCTS = [
   // ── NEW iPHONES – iPhone 15 Series ──
   {id:1,name:"iPhone 15",storage:"128GB",price:326,condition:"New",brand:"Apple",moq:10,category:"iPhone",img:"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15.jpg",desc:"Apple iPhone 15 128GB. A16 Bionic chip, 6.1-inch Super Retina XDR display, 48MP camera system, Dynamic Island, USB-C. New, sealed, factory unlocked."},
@@ -40,28 +40,28 @@ window.DEFAULT_PRODUCTS = [
   {id:30,name:"PS5 Slim Disc",storage:"1TB",price:454.99,condition:"Game",brand:"Sony",moq:5,category:"PS5",img:"https://fdn2.gsmarena.com/vv/bigpic/sony-playstation-5-slim.jpg",desc:"Sony PlayStation 5 Slim Disc Edition 1TB. Ultra HD Blu-ray disc drive, 4K gaming at 120fps, DualSense controller included. New, sealed."},
   {id:31,name:"PS5 Pro",storage:"2TB",price:629.99,condition:"Game",brand:"Sony",moq:4,category:"PS5",img:"https://fdn2.gsmarena.com/vv/bigpic/sony-playstation-5-slim.jpg",desc:"Sony PlayStation 5 Pro 2TB. Enhanced GPU with 45% faster rendering, PlayStation Spectral Super Resolution AI upscaling, 4K 120fps. New, sealed."},
 ];
-
+ 
 // ── Get products (admin can override) ──────────────────────────────────────
 window.getProducts = function(){
   const saved = localStorage.getItem('arstemach_products');
   if(saved) return JSON.parse(saved);
   return window.DEFAULT_PRODUCTS;
 };
-
+ 
 // ── Save products ──────────────────────────────────────────────────────────
 window.saveProducts = function(products){
   localStorage.setItem('arstemach_products', JSON.stringify(products));
 };
-
+ 
 // ── Cart helpers ───────────────────────────────────────────────────────────
 window.getCart = function(){
   return JSON.parse(localStorage.getItem('arstemach_cart') || '[]');
 };
-
+ 
 window.saveCart = function(cart){
   localStorage.setItem('arstemach_cart', JSON.stringify(cart));
 };
-
+ 
 window.addToCartGlobal = function(p){
   let cart = window.getCart();
   const idx = cart.findIndex(i => i.id === p.id);
@@ -70,18 +70,18 @@ window.addToCartGlobal = function(p){
   window.saveCart(cart);
   window.updateAllCartCounts();
 };
-
+ 
 window.updateAllCartCounts = function(){
   const cart = window.getCart();
   const total = cart.reduce((a, i) => a + i.qty, 0);
   document.querySelectorAll('.cart-count').forEach(el => el.textContent = total);
 };
-
+ 
 // ── Settings ───────────────────────────────────────────────────────────────
 window.getSettings = function(){
   const defaults = {
     storeName: 'AR STELMACH SPÓŁKA JAWNA',
-    ownerEmail: 'sale@arstemach.pl',
+    ownerEmail: 'sale@arstelmach.pl',
     whatsapp: '',
     location: 'Poland / Europe',
     emailjsPublicKey: '',
@@ -92,12 +92,12 @@ window.getSettings = function(){
   const saved = JSON.parse(localStorage.getItem('arstemach_settings') || '{}');
   return {...defaults, ...saved};
 };
-
+ 
 // ── Init: seed products if not yet saved ──────────────────────────────────
 if(!localStorage.getItem('arstemach_products')){
   localStorage.setItem('arstemach_products', JSON.stringify(window.DEFAULT_PRODUCTS));
 }
-
+ 
 // ── Theme & lang init ─────────────────────────────────────────────────────
 (function(){
   const t = localStorage.getItem('theme') || 'dark';
