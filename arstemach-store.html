@@ -26,7 +26,7 @@ nav a:hover,nav a.active{background:var(--purple-glow);color:var(--purple-light)
 .cart-btn{background:var(--purple);color:#fff;border:none;padding:0.45rem 1rem;border-radius:8px;font-size:0.875rem;font-weight:600;display:flex;align-items:center;gap:0.5rem;transition:all var(--transition)}
 .cart-btn:hover{background:var(--purple-dark)}
 .cart-count{background:var(--gold);color:#000;border-radius:50%;width:18px;height:18px;font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
-
+ 
 /* STORE LAYOUT */
 .store-layout{max-width:1400px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:240px 1fr;gap:2rem}
 .sidebar{position:sticky;top:80px;height:fit-content}
@@ -36,7 +36,7 @@ nav a:hover,nav a.active{background:var(--purple-glow);color:var(--purple-light)
 .filter-btn:hover,.filter-btn.active{background:var(--purple-glow);border-color:var(--border);color:var(--purple-light)}
 .search-box{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.65rem 1rem;color:var(--text);font-family:inherit;font-size:0.875rem;outline:none;transition:border-color var(--transition)}
 .search-box:focus{border-color:var(--purple)}
-
+ 
 /* PRODUCT GRID */
 .store-main{}
 .store-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
@@ -62,7 +62,7 @@ nav a:hover,nav a.active{background:var(--purple-glow);color:var(--purple-light)
 .add-btn:hover{background:var(--purple-dark);transform:scale(1.1)}
 .no-products{text-align:center;padding:4rem;color:var(--muted)}
 .no-products div{font-size:3rem;margin-bottom:1rem}
-
+ 
 /* CART PANEL */
 .cart-panel{position:fixed;right:-480px;top:0;width:480px;height:100vh;background:var(--card);border-left:1px solid var(--border);z-index:300;transition:right 0.3s ease;overflow-y:auto;display:flex;flex-direction:column}
 .cart-panel.open{right:0}
@@ -94,7 +94,7 @@ nav a:hover,nav a.active{background:var(--purple-glow);color:var(--purple-light)
 .clear-cart-btn:hover{border-color:rgba(239,68,68,0.5);color:#ef4444}
 .empty-cart{text-align:center;padding:3rem 1.5rem;color:var(--muted)}
 .empty-cart div{font-size:3rem;margin-bottom:1rem}
-
+ 
 /* CHECKOUT MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:400;display:none;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.open{display:flex}
@@ -119,7 +119,7 @@ nav a:hover,nav a.active{background:var(--purple-glow);color:var(--purple-light)
 .order-success-icon{font-size:4rem;margin-bottom:1rem}
 .order-success h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;margin-bottom:0.5rem}
 .order-success p{color:var(--muted);line-height:1.7}
-
+ 
 /* PRODUCT DETAIL MODAL */
 .product-modal{background:var(--card);border:1px solid var(--border);border-radius:18px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto;padding:2rem}
 .modal-img{width:100%;height:220px;background:var(--bg2);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;overflow:hidden}
@@ -158,7 +158,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;tex
     </div>
   </div>
 </header>
-
+ 
 <div class="store-layout">
   <aside class="sidebar">
     <div class="sidebar-section">
@@ -174,10 +174,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;tex
     </div>
     <div class="sidebar-section">
       <div class="sidebar-title">Info</div>
-      <p style="font-size:0.8rem;color:var(--muted);line-height:1.7">🌍 Worldwide delivery<br>📦 MOQ as listed<br>💶 All prices in EUR<br>📧 sale@arstemach.pl</p>
+      <p style="font-size:0.8rem;color:var(--muted);line-height:1.7">🌍 Worldwide delivery<br>📦 MOQ as listed<br>💶 All prices in EUR<br>📧 sale@arstelmach.pl</p>
     </div>
   </aside>
-
+ 
   <main class="store-main">
     <div class="store-header">
       <div class="store-title">All <span style="color:var(--purple-light)">Products</span></div>
@@ -186,7 +186,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;tex
     <div class="product-grid" id="productGrid"></div>
   </main>
 </div>
-
+ 
 <!-- Cart Panel -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-panel" id="cartPanel">
@@ -197,7 +197,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;tex
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer" id="cartFooter"></div>
 </div>
-
+ 
 <!-- Product Detail Modal -->
 <div class="modal-overlay" id="detailModal" onclick="if(event.target===this)closeDetail()">
   <div class="product-modal">
@@ -213,7 +213,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;tex
     <button class="modal-add-btn" id="detailAddBtn">Add to Cart</button>
   </div>
 </div>
-
+ 
 <!-- Checkout Modal -->
 <div class="modal-overlay" id="checkoutModal" onclick="if(event.target===this)closeCheckout()">
   <div class="modal">
@@ -238,52 +238,52 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;tex
         <div class="form-group"><label>Postal Code</label><input id="coPostal" placeholder="00-001"></div>
       </div>
       <div class="form-group"><label>Additional Notes</label><textarea id="coNotes" placeholder="Any special requirements..."></textarea></div>
-      <button class="place-order-btn" onclick="placeOrder()">Place Order — Send to sale@arstemach.pl</button>
+      <button class="place-order-btn" onclick="placeOrder()">Place Order — Send to sale@arstelmach.pl</button>
     </div>
     <div id="orderSuccess" class="order-success" style="display:none">
       <div class="order-success-icon">✅</div>
       <h3>Order Submitted!</h3>
-      <p>Your order has been sent to <strong>sale@arstemach.pl</strong>. We will contact you within 24 hours to confirm your order and arrange payment and delivery.</p>
+      <p>Your order has been sent to <strong>sale@arstelmach.pl</strong>. We will contact you within 24 hours to confirm your order and arrange payment and delivery.</p>
     </div>
   </div>
 </div>
-
+ 
 <div class="toast" id="toast"></div>
-
-<footer>AR STELMACH SPÓŁKA JAWNA · sale@arstemach.pl · arstemach.pl</footer>
-
+ 
+<footer>AR STELMACH SPÓŁKA JAWNA · sale@arstelmach.pl · arstelmach.pl</footer>
+ 
 <script src="shared.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 let currentFilter='All';
 let currentProduct=null;
-
+ 
 // Theme
 const savedTheme=localStorage.getItem('theme')||'dark';
 document.documentElement.setAttribute('data-theme',savedTheme);
 document.querySelector('.theme-btn').textContent=savedTheme==='light'?'☀️':'🌙';
 function toggleTheme(){const d=document.documentElement;const isL=d.getAttribute('data-theme')==='light';d.setAttribute('data-theme',isL?'dark':'light');document.querySelector('.theme-btn').textContent=isL?'🌙':'☀️';localStorage.setItem('theme',isL?'dark':'light')}
-
+ 
 // Lang
 let currentLang=localStorage.getItem('lang')||'en';
 document.getElementById('langSelect').value=currentLang;
 function setLang(l){currentLang=l;localStorage.setItem('lang',l);document.getElementById('langSelect').value=l;}
-
+ 
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
-
+ 
 function updateCartCount(){
   const cart=JSON.parse(localStorage.getItem('arstemach_cart')||'[]');
   const total=cart.reduce((a,i)=>a+i.qty,0);
   document.querySelectorAll('.cart-count').forEach(el=>el.textContent=total);
 }
-
+ 
 function setFilter(btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   currentFilter=btn.getAttribute('data-filter');
   renderProducts();
 }
-
+ 
 function renderProducts(){
   const products=window.getProducts();
   const search=document.getElementById('searchInput').value.toLowerCase();
@@ -312,7 +312,7 @@ function renderProducts(){
       </div>
     </div>`).join('');
 }
-
+ 
 function addItem(id){
   const p=window.getProducts().find(x=>x.id===id);
   if(!p)return;
@@ -323,7 +323,7 @@ function addItem(id){
   updateCartCount();
   showToast('Added to cart!');
 }
-
+ 
 function openDetail(id){
   const p=window.getProducts().find(x=>x.id===id);
   if(!p)return;
@@ -345,7 +345,7 @@ function openDetail(id){
   document.getElementById('detailModal').classList.add('open');
 }
 function closeDetail(){document.getElementById('detailModal').classList.remove('open')}
-
+ 
 function openCart(){
   document.getElementById('cartPanel').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
@@ -355,7 +355,7 @@ function closeCart(){
   document.getElementById('cartPanel').classList.remove('open');
   document.getElementById('cartOverlay').classList.remove('open');
 }
-
+ 
 function renderCart(){
   const cart=JSON.parse(localStorage.getItem('arstemach_cart')||'[]');
   const items=document.getElementById('cartItems');
@@ -386,7 +386,7 @@ function renderCart(){
     <button class="checkout-btn" onclick="closeCart();openCheckout()">Proceed to Checkout</button>
     <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>`;
 }
-
+ 
 function changeQty(id,delta){
   let cart=JSON.parse(localStorage.getItem('arstemach_cart')||'[]');
   const idx=cart.findIndex(i=>i.id===id);
@@ -401,7 +401,7 @@ function removeItem(id){
   updateCartCount();renderCart();
 }
 function clearCart(){localStorage.removeItem('arstemach_cart');updateCartCount();renderCart();}
-
+ 
 function openCheckout(){
   const cart=JSON.parse(localStorage.getItem('arstemach_cart')||'[]');
   if(!cart.length){showToast('Your cart is empty');return;}
@@ -415,7 +415,7 @@ function openCheckout(){
   document.getElementById('checkoutModal').classList.add('open');
 }
 function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open')}
-
+ 
 function placeOrder(){
   const name=document.getElementById('coName').value.trim();
   const email=document.getElementById('coEmail').value.trim();
@@ -431,13 +431,13 @@ function placeOrder(){
     address:`${street}, ${document.getElementById('coCity').value} ${document.getElementById('coPostal').value}, ${document.getElementById('coCountry').value}`,
     notes:document.getElementById('coNotes').value,
     order_details:orderDetails,order_total:'€'+total.toFixed(2),
-    to_email:'sale@arstemach.pl'
+    to_email:'sale@arstelmach.pl'
   };
   // Save order to localStorage
   let orders=JSON.parse(localStorage.getItem('arstemach_orders')||'[]');
   orders.push({...orderData,id:Date.now(),date:new Date().toISOString(),cart:[...cart]});
   localStorage.setItem('arstemach_orders',JSON.stringify(orders));
-
+ 
   if(settings.emailjsPublicKey&&settings.emailjsServiceId&&settings.emailjsTemplateId){
     emailjs.init(settings.emailjsPublicKey);
     emailjs.send(settings.emailjsServiceId,settings.emailjsTemplateId,orderData)
@@ -449,9 +449,10 @@ function placeOrder(){
     document.getElementById('orderSuccess').style.display='block';
   }
 }
-
+ 
 renderProducts();
 updateCartCount();
 </script>
 </body>
 </html>
+ 
