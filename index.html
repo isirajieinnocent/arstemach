@@ -91,22 +91,12 @@ nav a:hover,nav a.active{background:var(--purple-glow);color:var(--purple-light)
 
 /* CONTACT SECTION */
 .contact-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 2rem}
-.contact-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:4rem;align-items:start}
 .contact-info h2{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:1rem}
 .contact-info p{color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
 .contact-detail{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;color:var(--muted);font-size:0.9rem}
 .contact-detail strong{color:var(--text)}
 .contact-icon{width:36px;height:36px;background:var(--purple-glow);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
-.contact-form h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:1.5rem}
-.form-group{margin-bottom:1.1rem}
-.form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--muted);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.05em}
-.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.7rem 1rem;color:var(--text);font-family:inherit;font-size:0.9rem;transition:border-color var(--transition);outline:none}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--purple)}
-.form-group textarea{resize:vertical;min-height:100px}
-.submit-btn{width:100%;background:var(--purple);color:#fff;border:none;padding:0.9rem;border-radius:10px;font-size:1rem;font-weight:700;font-family:inherit;transition:all var(--transition)}
-.submit-btn:hover{background:var(--purple-dark)}
-.form-success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#22C55E;border-radius:8px;padding:0.75rem 1rem;text-align:center;font-size:0.9rem;margin-top:1rem;display:none}
 
 /* WHY US */
 .why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
@@ -149,7 +139,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
 
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;gap:2rem}
-  .contact-inner{grid-template-columns:1fr}
   nav{display:none}
 }
 @media(max-width:600px){
@@ -229,28 +218,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <p data-i18n="contact_desc">Have questions about our products, pricing or minimum order quantities? Send us a message and we will get back to you within 24 hours.</p>
       <div class="contact-detail"><div class="contact-icon">📧</div><div><strong>sale@arstelmach.pl</strong></div></div>
       <div class="contact-detail"><div class="contact-icon">🌐</div><div><strong>arstelmach.pl</strong></div></div>
-      <div class="contact-detail"><div class="contact-icon">📍</div><div><strong>Poland / Europe</strong></div></div>
-    </div>
-    <div class="contact-form">
-      <h3 data-i18n="send_message">Send Us a Message</h3>
-      <div class="form-group">
-        <label data-i18n="your_name">Your Name</label>
-        <input type="text" id="cName" placeholder="John Doe">
-      </div>
-      <div class="form-group">
-        <label data-i18n="email">Email Address</label>
-        <input type="email" id="cEmail" placeholder="john@company.com">
-      </div>
-      <div class="form-group">
-        <label data-i18n="subject">Subject</label>
-        <input type="text" id="cSubject" placeholder="Product inquiry...">
-      </div>
-      <div class="form-group">
-        <label data-i18n="message">Message</label>
-        <textarea id="cMessage" placeholder="Tell us what you need..."></textarea>
-      </div>
-      <button class="submit-btn" onclick="sendContact()" data-i18n="send_message_btn">Send Message</button>
-      <div class="form-success" id="contactSuccess" data-i18n="message_sent">✓ Message sent! We'll get back to you within 24 hours.</div>
+      <div class="contact-detail"><div class="contact-icon">📍</div><div><strong>94, Unit 8/2, Kielce, Postal Code: 25-560, Poland</strong></div></div>
     </div>
   </div>
 </section>
@@ -264,7 +232,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <a href="arstemach-poland.html" data-i18n="nav_poland">Poland</a>
       <a href="arstemach-admin.html">Admin</a>
     </div>
-    <div class="footer-copy">© 2026 AR STELMACH · sale@arstelmach.pl</div>
+    <div class="footer-copy">© 2026 AR STELMACH · 94, Unit 8/2, Kielce, 25-560, Poland · sale@arstelmach.pl</div>
   </div>
 </footer>
 
@@ -290,11 +258,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
 <script>
 // i18n
 const TRANSLATIONS={
-  en:{nav_home:"Home",nav_store:"Store",nav_poland:"Poland",nav_contact:"Contact",cart:"Cart",hero_tag:"Wholesale · Europe · Poland",hero_desc:"AR STELMACH SPÓŁKA JAWNA supplies certified new and used iPhones and PlayStation 5 consoles to retailers across Europe.",browse_products:"Browse Products",contact_us:"Contact Us",products:"Products",delivery:"Delivery",wholesale:"Wholesale",see_all:"See all →",why1_t:"Verified Stock",why1_d:"All devices are quality-checked and certified before dispatch.",why2_t:"Worldwide Delivery",why2_d:"We ship across Europe and worldwide with tracked logistics.",why3_t:"B2B Focused",why3_d:"Dedicated to wholesalers, retailers and resellers with volume pricing.",why4_t:"Direct Support",why4_d:"Reach our team directly via email or WhatsApp for fast responses.",contact_title:"Get In Touch",contact_desc:"Have questions about our products? Send us a message.",send_message:"Send Us a Message",your_name:"Your Name",email:"Email Address",subject:"Subject",message:"Message",send_message_btn:"Send Message",message_sent:"✓ Message sent! We'll get back to you within 24 hours.",add_to_cart:"Add to Cart"},
-  pl:{nav_home:"Główna",nav_store:"Sklep",nav_poland:"Polska",nav_contact:"Kontakt",cart:"Koszyk",hero_tag:"Hurtownia · Europa · Polska",hero_desc:"AR STELMACH SPÓŁKA JAWNA dostarcza certyfikowane nowe i używane iPhone'y oraz konsole PlayStation 5 dla sprzedawców w całej Europie.",browse_products:"Przeglądaj produkty",contact_us:"Skontaktuj się",products:"Produkty",delivery:"Dostawa",wholesale:"Hurtownia",see_all:"Zobacz wszystkie →",why1_t:"Zweryfikowany stan",why1_d:"Wszystkie urządzenia są sprawdzane i certyfikowane przed wysyłką.",why2_t:"Dostawa na cały świat",why2_d:"Wysyłamy po całej Europie i na cały świat ze śledzeniem przesyłki.",why3_t:"Dla firm B2B",why3_d:"Dedykowane dla hurtowników, sprzedawców detalicznych i resellerów.",why4_t:"Bezpośrednie wsparcie",why4_d:"Skontaktuj się bezpośrednio przez e-mail lub WhatsApp.",contact_title:"Skontaktuj się",contact_desc:"Masz pytania o produkty? Wyślij nam wiadomość.",send_message:"Wyślij wiadomość",your_name:"Twoje imię",email:"Adres e-mail",subject:"Temat",message:"Wiadomość",send_message_btn:"Wyślij wiadomość",message_sent:"✓ Wiadomość wysłana! Odezwiemy się w ciągu 24 godzin.",add_to_cart:"Dodaj do koszyka"},
-  de:{nav_home:"Startseite",nav_store:"Shop",nav_poland:"Polen",nav_contact:"Kontakt",cart:"Warenkorb",browse_products:"Produkte ansehen",contact_us:"Kontakt",products:"Produkte",delivery:"Lieferung",wholesale:"Großhandel",see_all:"Alle ansehen →",contact_title:"Kontakt aufnehmen",send_message:"Nachricht senden",your_name:"Ihr Name",email:"E-Mail-Adresse",subject:"Betreff",message:"Nachricht",send_message_btn:"Nachricht senden",message_sent:"✓ Nachricht gesendet!",add_to_cart:"In den Warenkorb"},
-  fr:{nav_home:"Accueil",nav_store:"Boutique",nav_poland:"Pologne",nav_contact:"Contact",cart:"Panier",browse_products:"Voir les produits",contact_us:"Nous contacter",products:"Produits",delivery:"Livraison",wholesale:"Grossiste",see_all:"Voir tout →",contact_title:"Contactez-nous",send_message:"Envoyer un message",your_name:"Votre nom",email:"Adresse e-mail",subject:"Sujet",message:"Message",send_message_btn:"Envoyer",message_sent:"✓ Message envoyé!",add_to_cart:"Ajouter au panier"},
-  es:{nav_home:"Inicio",nav_store:"Tienda",nav_poland:"Polonia",nav_contact:"Contacto",cart:"Carrito",browse_products:"Ver productos",contact_us:"Contáctenos",products:"Productos",delivery:"Entrega",wholesale:"Mayorista",see_all:"Ver todo →",contact_title:"Contáctenos",send_message:"Enviar mensaje",your_name:"Su nombre",email:"Correo electrónico",subject:"Asunto",message:"Mensaje",send_message_btn:"Enviar mensaje",message_sent:"✓ ¡Mensaje enviado!",add_to_cart:"Añadir al carrito"}
+  en:{nav_home:"Home",nav_store:"Store",nav_poland:"Poland",nav_contact:"Contact",cart:"Cart",hero_tag:"Wholesale · Europe · Poland",hero_desc:"AR STELMACH SPÓŁKA JAWNA supplies certified new and used iPhones and PlayStation 5 consoles to retailers across Europe.",browse_products:"Browse Products",contact_us:"Contact Us",products:"Products",delivery:"Delivery",wholesale:"Wholesale",see_all:"See all →",why1_t:"Verified Stock",why1_d:"All devices are quality-checked and certified before dispatch.",why2_t:"Worldwide Delivery",why2_d:"We ship across Europe and worldwide with tracked logistics.",why3_t:"B2B Focused",why3_d:"Dedicated to wholesalers, retailers and resellers with volume pricing.",why4_t:"Direct Support",why4_d:"Reach our team directly via email or WhatsApp for fast responses.",contact_title:"Get In Touch",contact_desc:"Have questions about our products, pricing or minimum order quantities? Contact us directly — we respond within 24 hours.",add_to_cart:"Add to Cart"},
+  pl:{nav_home:"Główna",nav_store:"Sklep",nav_poland:"Polska",nav_contact:"Kontakt",cart:"Koszyk",hero_tag:"Hurtownia · Europa · Polska",hero_desc:"AR STELMACH SPÓŁKA JAWNA dostarcza certyfikowane nowe i używane iPhone'y oraz konsole PlayStation 5 dla sprzedawców w całej Europie.",browse_products:"Przeglądaj produkty",contact_us:"Skontaktuj się",products:"Produkty",delivery:"Dostawa",wholesale:"Hurtownia",see_all:"Zobacz wszystkie →",why1_t:"Zweryfikowany stan",why1_d:"Wszystkie urządzenia są sprawdzane i certyfikowane przed wysyłką.",why2_t:"Dostawa na cały świat",why2_d:"Wysyłamy po całej Europie i na cały świat ze śledzeniem przesyłki.",why3_t:"Dla firm B2B",why3_d:"Dedykowane dla hurtowników, sprzedawców detalicznych i resellerów.",why4_t:"Bezpośrednie wsparcie",why4_d:"Skontaktuj się bezpośrednio przez e-mail lub WhatsApp.",contact_title:"Skontaktuj się",contact_desc:"Masz pytania o produkty, ceny lub minimalne zamówienia? Napisz do nas — odpowiadamy w ciągu 24 godzin.",add_to_cart:"Dodaj do koszyka"},
+  de:{nav_home:"Startseite",nav_store:"Shop",nav_poland:"Polen",nav_contact:"Kontakt",cart:"Warenkorb",hero_tag:"Großhandel · Europa · Polen",hero_desc:"AR STELMACH SPÓŁKA JAWNA liefert zertifizierte neue und gebrauchte iPhones sowie PlayStation 5 Konsolen an Händler in ganz Europa.",browse_products:"Produkte ansehen",contact_us:"Kontakt",products:"Produkte",delivery:"Lieferung",wholesale:"Großhandel",see_all:"Alle ansehen →",why1_t:"Verifizierter Bestand",why1_d:"Alle Geräte werden vor dem Versand geprüft und zertifiziert.",why2_t:"Weltweite Lieferung",why2_d:"Wir versenden europaweit und weltweit mit Sendungsverfolgung.",why3_t:"B2B-Fokus",why3_d:"Für Großhändler, Einzelhändler und Wiederverkäufer.",why4_t:"Direkter Support",why4_d:"Kontaktieren Sie uns direkt per E-Mail oder WhatsApp.",contact_title:"Kontakt aufnehmen",contact_desc:"Fragen zu Produkten, Preisen oder MOQ? Schreiben Sie uns direkt — Antwort innerhalb von 24 Stunden.",add_to_cart:"In den Warenkorb"},
+  fr:{nav_home:"Accueil",nav_store:"Boutique",nav_poland:"Pologne",nav_contact:"Contact",cart:"Panier",hero_tag:"Grossiste · Europe · Pologne",hero_desc:"AR STELMACH SPÓŁKA JAWNA fournit des iPhones neufs et reconditionnés certifiés ainsi que des PlayStation 5 aux revendeurs à travers l'Europe.",browse_products:"Voir les produits",contact_us:"Nous contacter",products:"Produits",delivery:"Livraison",wholesale:"Grossiste",see_all:"Voir tout →",why1_t:"Stock vérifié",why1_d:"Tous les appareils sont contrôlés et certifiés avant expédition.",why2_t:"Livraison mondiale",why2_d:"Nous expédions en Europe et dans le monde entier avec suivi.",why3_t:"Axé B2B",why3_d:"Dédié aux grossistes, détaillants et revendeurs.",why4_t:"Support direct",why4_d:"Contactez-nous directement par e-mail ou WhatsApp.",contact_title:"Contactez-nous",contact_desc:"Des questions sur nos produits, prix ou MOQ ? Écrivez-nous directement — réponse sous 24 heures.",add_to_cart:"Ajouter au panier"},
+  es:{nav_home:"Inicio",nav_store:"Tienda",nav_poland:"Polonia",nav_contact:"Contacto",cart:"Carrito",hero_tag:"Mayorista · Europa · Polonia",hero_desc:"AR STELMACH SPÓŁKA JAWNA suministra iPhones nuevos y usados certificados y consolas PlayStation 5 a minoristas en toda Europa.",browse_products:"Ver productos",contact_us:"Contáctenos",products:"Productos",delivery:"Entrega",wholesale:"Mayorista",see_all:"Ver todo →",why1_t:"Stock verificado",why1_d:"Todos los dispositivos son revisados y certificados antes del envío.",why2_t:"Entrega mundial",why2_d:"Enviamos por toda Europa y el mundo con seguimiento.",why3_t:"Enfoque B2B",why3_d:"Dedicado a mayoristas, minoristas y revendedores.",why4_t:"Soporte directo",why4_d:"Contáctenos directamente por correo o WhatsApp.",contact_title:"Contáctenos",contact_desc:"¿Preguntas sobre productos, precios o MOQ? Escríbanos directamente — respondemos en 24 horas.",add_to_cart:"Añadir al carrito"}
 };
 
 let currentLang=localStorage.getItem('lang')||'en';
@@ -365,91 +333,4 @@ function openModal(p){
     <div class="spec-row"><span class="spec-label">Storage</span><span class="spec-val">${p.storage}</span></div>
     <div class="spec-row"><span class="spec-label">Condition</span><span class="spec-val">${p.condition}</span></div>
     <div class="spec-row"><span class="spec-label">Price</span><span class="spec-val">€${p.price}</span></div>
-    <div class="spec-row"><span class="spec-label">MOQ</span><span class="spec-val">${p.moq} units</span></div>
-    <div class="spec-row"><span class="spec-label">Brand</span><span class="spec-val">${p.brand||'Apple'}</span></div>
-  `;
-  document.getElementById('modal').classList.add('open');
-}
-function closeModal(){document.getElementById('modal').classList.remove('open')}
-document.getElementById('modalAddBtn').onclick=function(){if(currentProduct){addToCart(currentProduct);closeModal();}};
-
-function getProducts(){
-  const saved=localStorage.getItem('arstemach_products');
-  if(saved) return JSON.parse(saved);
-  return window.DEFAULT_PRODUCTS||[];
-}
-
-function renderHeroCards(){
-  const products=getProducts();
-  const featured=products.slice(0,3);
-  document.getElementById('heroCards').innerHTML=featured.map(p=>`
-    <div class="hero-card" onclick="openModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">
-      <div class="hero-card-header">
-        <div class="hero-card-name">${p.name} ${p.storage}</div>
-        <div class="hero-price">€${p.price}</div>
-      </div>
-      <div class="hero-card-meta">
-        <span class="badge badge-${p.condition==='New'?'new':p.condition==='Used'?'used':'game'}">${p.condition}</span>
-        <span class="badge badge-moq">MOQ: ${p.moq}</span>
-      </div>
-    </div>`).join('');
-}
-
-function renderFeatured(){
-  const products=getProducts();
-  const featured=products.filter(p=>p.condition==='New').slice(0,8);
-  document.getElementById('featuredGrid').innerHTML=featured.map(p=>`
-    <div class="product-card" onclick="openModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">
-      <div class="product-img"><img src="${p.img||''}" alt="${p.name}" onerror="this.parentNode.innerHTML='<span style=font-size:3.5rem>📱</span>'"></div>
-      <div class="product-body">
-        <div class="badges-row">
-          <span class="badge badge-${p.condition==='New'?'new':p.condition==='Used'?'used':'game'}">${p.condition}</span>
-          <span class="badge badge-moq">MOQ: ${p.moq}</span>
-        </div>
-        <div class="product-name">${p.name}</div>
-        <div class="product-storage">${p.storage}</div>
-        <div class="product-footer">
-          <div class="product-price">€${p.price}</div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">+</button>
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-function sendContact(){
-  const name=document.getElementById('cName').value.trim();
-  const email=document.getElementById('cEmail').value.trim();
-  const subject=document.getElementById('cSubject').value.trim();
-  const message=document.getElementById('cMessage').value.trim();
-  if(!name||!email||!message){showToast('Please fill all required fields');return;}
-
-  const settings=JSON.parse(localStorage.getItem('arstemach_settings')||'{}');
-  if(settings.emailjsPublicKey&&settings.emailjsServiceId&&settings.emailjsTemplateId){
-    emailjs.init(settings.emailjsPublicKey);
-    emailjs.send(settings.emailjsServiceId,settings.emailjsTemplateId,{
-      from_name:name,from_email:email,subject:subject,message:message,to_email:'sale@arstelmach.pl'
-    }).then(()=>{
-      document.getElementById('contactSuccess').style.display='block';
-      document.getElementById('cName').value='';
-      document.getElementById('cEmail').value='';
-      document.getElementById('cSubject').value='';
-      document.getElementById('cMessage').value='';
-    }).catch(()=>showToast('Email sent! (configure EmailJS in admin for real delivery)'));
-  } else {
-    document.getElementById('contactSuccess').style.display='block';
-    document.getElementById('cName').value='';
-    document.getElementById('cEmail').value='';
-    document.getElementById('cSubject').value='';
-    document.getElementById('cMessage').value='';
-  }
-}
-
-document.getElementById('langSelect').value=currentLang;
-applyTranslations();
-updateCartCount();
-renderHeroCards();
-renderFeatured();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-</body>
-</html>
+    <div class
