@@ -84,9 +84,9 @@ window.getSettings = function(){
     ownerEmail: 'sale@arstelmach.pl',
     whatsapp: '',
     location: 'Poland / Europe',
-    emailjsPublicKey: '',
-    emailjsServiceId: '',
-    emailjsTemplateId: '',
+    emailjsPublicKey: 'DRy2KVb1G7GAlTuzG',
+    emailjsServiceId: 'service_hz9htao',
+    emailjsTemplateId: 'template_9fyp86x',
     adminPassword: 'enterprise1'
   };
   const saved = JSON.parse(localStorage.getItem('arstemach_settings') || '{}');
